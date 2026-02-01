@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💘</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #d4f8d4, #f0fff0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.4;
+    }
+
+    .box {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      border: 3px solid #7bcf9b;
+      min-width: 300px;
+    }
+
+    h1 {
+      color: #2f7d4f;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no {
+      background-color: #b5b5b5;
+    }
+
+    /* bouquet display for final screen */
+    .final-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .bouquet {
+      font-size: 250px;  /* much bigger */
+      animation: float 1s ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(-30px); opacity: 0; }
+      50% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-10px); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- flowers -->
+  <div class="flower" style="top:10%; left:15%;">🌼</div>
+  <div class="flower" style="top:20%; right:20%;">🌸</div>
+  <div class="flower" style="bottom:15%; left:25%;">🌷</div>
+  <div class="flower" style="bottom:10%; right:15%;">🌻</div>
+
+  <div class="box" id="content">
+    <h1>Are you free this Saturday? 😊</h1>
+    <div class="buttons">
+      <button class="yes" onclick="nextStep(2)">Yes 💚</button>
+      <button class="no" onclick="nextStep(2)">Maybe 🤍</button>
+    </div>
+  </div>
+
+  <script>
+    let step = 1;
+    let yesScale = 1;
+
+    function nextStep(next) {
+      step = next;
+      const content = document.getElementById("content");
+
+      if (step === 2) {
+        content.innerHTML = `
+          <h1>Can I give you a gift? 🎁🌷</h1>
+          <div class="buttons">
+            <button class="yes" onclick="nextStep(3)">Yes 😊</button>
+            <button class="no" onclick="nextStep(3)">Sure 😅</button>
+          </div>
+        `;
+      }
+
+      if (step === 3) {
+        yesScale = 1;
+        content.innerHTML = `
+          <h1>Will you be my Valentine? 💖</h1>
+          <div class="buttons">
+            <button id="no" class="no" onclick="noClicked()">No 😅</button>
+            <button id="yes" class="yes" onclick="sayYes()">Yes 💕</button>
+          </div>
+        `;
+      }
+    }
+
+    function noClicked() {
+      const yesBtn = document.getElementById("yes");
+      yesScale += 0.2;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function sayYes() {
+      document.body.innerHTML = `
+        <div class="final-container">
+          <h1 style="color:#2f7d4f;">YAY💚</h1>
+          <h2>Happy Valentine’s Day 🌷💐</h2>
+          <div class="bouquet">💐</div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
